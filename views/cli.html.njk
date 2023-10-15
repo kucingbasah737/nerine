@@ -4,8 +4,17 @@
 <h1>NERINE {{ NERINE_VERSION }}</h1>
 
 <form method="POST">
+
+{% if NERINE_PASSWORD %}
+Password:
+<input type="password" name="pwd" value="{{ password }}">
+<br>
+{% endif %}
+
 [{{ dirname }}]$
 <input type="text" name="cmd" style="width: 800px;">
+
+<input type="submit">
 </form>
 
 {% if command %}

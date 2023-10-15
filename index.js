@@ -19,7 +19,12 @@ const { argv } = yargs(hideBin(process.argv))
   .options('port', {
     type: 'number',
     default: Number(process.env.NERINE_PORT) || DEFAULT_PORT,
-    describe: 'also obey NERINE_PORT',
+    describe: 'also obey NERINE_PORT env',
+  })
+  .options('password', {
+    type: 'string',
+    default: process.env.NERINE_PASSWORD || '',
+    describe: 'also obey NERINE_PASSWORD env',
   })
   .options('pidfile', {
     type: 'string',
@@ -29,6 +34,7 @@ const { argv } = yargs(hideBin(process.argv))
 const {
   port,
   pidfile,
+  password,
 } = argv;
 
 (async () => {
@@ -46,6 +52,7 @@ const {
 
   app.use((req, res, next) => {
     res.locals.NERINE_VERSION = pjson.version;
+    res.locals.NERINE_PASSWORD = password;
 
     next();
   });
