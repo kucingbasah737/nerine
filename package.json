@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postversion": "git push && git push --tags",
     "version": "auto-changelog -p && git add CHANGELOG.md",
-    "build": "pkg --compress Brotli package.json",
-    "build-linux-x64": "pkg --targets node18-linux-x64 --output dist/nerine-x64-linux --compress Brotli index.js"
+    "build": "pkg --compress Brotli package.json"
   },
   "bin": {
     "nerine": "./index.js"
