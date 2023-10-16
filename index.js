@@ -25,6 +25,9 @@ const routerLogin = require('./lib/routers/login');
 
 const { argv } = yargs(hideBin(process.argv))
   .version(pjson.version)
+  .options('host', {
+    type: 'string',
+  })
   .options('port', {
     type: 'number',
     default: Number(process.env.NERINE_PORT) || DEFAULT_PORT,
@@ -62,6 +65,7 @@ const { argv } = yargs(hideBin(process.argv))
 // console.log(argv); process.exit(0);
 
 const {
+  host,
   port,
   pidfile,
   password,
@@ -127,8 +131,9 @@ app.all('/', validateSession, (req, res) => {
   res.redirect(vars.defaultPath);
 });
 
-app.listen(port, async () => {
+app.listen(port, host || null, async () => {
   logger.info('Listening', {
+    host,
     port,
     version: pjson.version,
     workDir: process.cwd(),
