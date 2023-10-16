@@ -130,6 +130,7 @@ app.all('/', validateSession, (req, res) => {
 app.listen(port, async () => {
   logger.info('Listening', {
     port,
+    version: pjson.version,
     workDir: process.cwd(),
   });
 
