@@ -6,7 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "postversion": "git push && git push --tags",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md",
+    "build": "pkg --compress Brotli package.json",
+    "build-linux-x64": "pkg --targets node18-linux-x64 --output dist/nerine-x64-linux --compress Brotli index.js"
+  },
+  "bin": {
+    "nerine": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +27,12 @@
     "url": "https://github.com/kucingbasah737/nerine/issues"
   },
   "homepage": "https://github.com/kucingbasah737/nerine#readme",
+  "pkg": {
+    "scripts": "index.js",
+    "assets": "views/*.njk",
+    "targets": ["node18-linux-x64"],
+    "outputPath": "dist"
+  },
   "devDependencies": {
     "auto-changelog": "^2.4.0",
     "eslint": "^8.51.0",

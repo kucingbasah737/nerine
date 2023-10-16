@@ -3,7 +3,7 @@
 const MODULE_NAME = 'NERINE';
 
 const DEFAULT_PORT = 8080;
-const NUNJUCKS_NO_CACHE = true;
+// const NUNJUCKS_NO_CACHE = true;
 
 require('dotenv').config();
 const crypto = require('node:crypto');
@@ -50,16 +50,23 @@ const { argv } = yargs(hideBin(process.argv))
     default: process.env.NERINE_SESSION_SECRET || uniqid(),
     describe: 'also obey NERINE_SESSION_SECRET',
   })
+  .options('cache', {
+    type: 'boolean',
+    default: true,
+  })
   .options('pidfile', {
     type: 'string',
   })
   .strict();
+
+// console.log(argv); process.exit(0);
 
 const {
   port,
   pidfile,
   password,
   passwordHash: passwordHashFromArg,
+  cache,
   sessionName,
   sessionSecret,
 } = argv;
@@ -97,10 +104,11 @@ app.use(session({
 
 nunjucks.configure(
   path.join(__dirname, 'views'),
+  // 'views',
   {
     autoescape: true,
     express: app,
-    noCache: NUNJUCKS_NO_CACHE,
+    noCache: !cache,
   },
 );
 
