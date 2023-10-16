@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const DEFAULT_PORT = 8080;
 const NUNJUCKS_NO_CACHE = true;
 
