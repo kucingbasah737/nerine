@@ -108,7 +108,7 @@ nunjucks.configure(
   {
     autoescape: true,
     express: app,
-    noCache: !cache,
+    noCache: cache === false,
   },
 );
 
